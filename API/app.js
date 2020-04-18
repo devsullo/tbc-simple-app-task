@@ -32,7 +32,7 @@ const clients = [
 const accounts = [
   {
     id: 15871394766921,
-    clientId: 15871394551248,
+    clientId: 158713945512480,
     type: 'მიმდინარე',
     currency: 'GEL',
     status: 'აქტიური'
@@ -53,6 +53,7 @@ app.get('/client/:id', (req, res) => {
   const client = clients.find(c => c.id === Number(clientId));
 
   if (client) {
+    client.accounts = accounts.filter(a => a.clientId === clientId) || [];
     res.send(client);
     return;
   }
