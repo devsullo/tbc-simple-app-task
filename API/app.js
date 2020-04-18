@@ -131,4 +131,4 @@ app.post('/account/close/:id', (req, res) => {
   res.status(404).send('Account not found');
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log('API started at http://localhost:3000/'));
