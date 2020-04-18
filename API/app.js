@@ -25,16 +25,15 @@ const clients = [
       address: 'ფარნავაზ მეფის ქუჩა'
     },
     avatar: '/',
-    accountId: 15871394766921
   }
 ];
 
 const accounts = [
   {
     id: 15871394766921,
-    clientId: 158713945512480,
+    clientId: 15871394551248,
     type: 'მიმდინარე',
-    currency: 'GEL',
+    currency: ['GEL'],
     status: 'აქტიური'
   }
 ]
@@ -44,36 +43,42 @@ const setUniqueNumber = (obj) => {
   return obj;
 };
 
+// Get all clients
 app.get('/clients', (req, res) => {
   res.send(clients);
 });
 
+// Get client details
 app.get('/client/:id', (req, res) => {
   const clientId = Number(req.params.id);
   const client = clients.find(c => c.id === Number(clientId));
 
   if (client) {
-    client.accounts = accounts.filter(a => a.clientId === clientId) || [];
-    res.send(client);
+    const clientAccounts = accounts.filter(a => a.clientId === clientId) || [];
+    const cloneClient = Object.assign({}, client);
+    cloneClient.accounts = clientAccounts;
+    res.send(cloneClient);
     return;
   }
 
   res.status(404).send('Client not found');
 });
 
-app.post('/client/add', (req, res) => {
+// Add client
+app.post('/client', (req, res) => {
   const client = setUniqueNumber(req.body);
   clients.push(client);
   res.send(client);
 });
 
+// Edit client
 app.put('/client/:id', (req, res) => {
   const clientId = Number(req.params.id);
   const newClient = req.body;
   
   clients.forEach((c, i) => {
     if (c.id === clientId) {
-      clients[i] = Object.assign(clients[i], newClient);
+      Object.assign(clients[i], newClient);
       res.send(clients[i]);
       return;
     }
@@ -84,6 +89,7 @@ app.put('/client/:id', (req, res) => {
   }
 });
 
+// Delete client
 app.delete('/client/:id', (req, res) => {
   const clientId = Number(req.params.id);
   const removeIndex = clients.map((c) => { return c.id; }).indexOf(clientId);
@@ -95,6 +101,34 @@ app.delete('/client/:id', (req, res) => {
   }
 
   res.status(404).send('Client not found');
+});
+
+// Add account
+app.post('/account', (req, res) => {
+  const clientId = Number(req.body.clientId);
+
+  if(clients.find(c => c.id === clientId)){
+    const account = setUniqueNumber(req.body);
+    accounts.push(account);
+    res.send(account);
+    return;
+  }
+
+  res.status(404).send('Client not found');
+});
+
+// Close account
+app.post('/account/close/:id', (req, res) => {
+  const accountId = Number(req.params.id);
+  const account = accounts.find(a => a.id === accountId);
+
+  if (account) {
+    account.status = 'დახურული';
+    res.send(account);
+    return;
+  }
+
+  res.status(404).send('Account not found');
 });
 
 app.listen(3000);
