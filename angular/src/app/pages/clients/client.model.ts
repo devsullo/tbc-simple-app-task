@@ -6,7 +6,7 @@ export interface IAddress {
   address: string;
 }
 
-export class Clients implements Deserializable {
+export class Client implements Deserializable {
   public id: number;
   public name: string;
   public surname: string;

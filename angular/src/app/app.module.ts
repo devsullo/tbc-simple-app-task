@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientsComponent } from './pages/clients/clients.component';
+import { AppStoreModule } from './store/app.store.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { ClientsComponent } from './pages/clients/clients.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppStoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
