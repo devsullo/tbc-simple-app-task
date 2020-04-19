@@ -1,1 +1,32 @@
-<p>clients works!</p>
+<div class="page-wrapper">
+  <p-toolbar>
+    <div class="ui-toolbar-group-left">
+      <button pButton type="button" label="დამატება" icon="pi pi-plus"></button>
+    </div>
+  </p-toolbar>
+  
+  <p-table [value]="clients.data" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ნომერი</th>
+        <th>კლიენტი</th>
+        <th>სქესი</th>
+        <th>პირადი ნომერი</th>
+        <th>მობილური</th>
+        <th>იურიდიული მისამართი</th>
+        <th>ფაქტიური მისამართი</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+      <tr>
+        <td>{{client.id}}</td>
+        <td>{{client.name + ' ' + client.surname}}</td>
+        <td>{{client.sex}}</td>
+        <td>{{client.personalNumber}}</td>
+        <td>{{client.phone}}</td>
+        <td>{{client.legalAddress.country + ', ' + client.legalAddress.city}}</td>
+        <td>{{client.actualAddress.country + ', ' + client.actualAddress.city}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
