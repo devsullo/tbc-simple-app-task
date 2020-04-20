@@ -1,0 +1,57 @@
+<p-dialog [header]="title" modal="true" resizable="false" [(visible)]="display" appendTo="body" [style]="{'max-width': '45rem'}">
+
+  <form #form [formGroup]="clientForm">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-6">
+        <label for="name">სახელი</label>
+        <input id="name" type="text" name="name" formControlName="name" pInputText [pKeyFilter]="nameRegExp"
+          [pValidateOnly]="true" placeholder="შეიყვანეთ თქვენი სახელი">
+        <div class="form-error" *ngIf="getErrorCondition('name')">{{ errors.name }}</div>
+      </div>
+      
+      <div class="ui-g-12 ui-md-6 ui-lg-6">
+        <label for="surname">გვარი</label>
+        <input id="surname" type="text" name="surname" formControlName="surname" pInputText [pKeyFilter]="nameRegExp"
+          [pValidateOnly]="true" placeholder="შეიყვანეთ თქვენი გვარი">
+        <div class="form-error" *ngIf="getErrorCondition('surname')">{{ errors.name }}</div>
+      </div>
+    </div>
+
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-4">
+        <p>სქესი</p>
+        <p-radioButton formControlName="sex" name="group1" value="ქალი" label="ქალი" inputId="opt1"></p-radioButton>
+        <p-radioButton class="last-radio-inp" formControlName="sex" name="group1" value="კაცი" label="კაცი" inputId="opt2">
+        </p-radioButton>
+        <div class="form-error" *ngIf="getErrorCondition('sex')">{{ errors.required }}</div>
+      </div>
+      
+      <div class="ui-g-12 ui-md-6 ui-lg-4">
+        <label for="personalNumber">პირადი ნომერი</label>
+        <p-inputMask inputId="personalNumber" mask="99999999999" formControlName="personalNumber" placeholder="99999999999">
+        </p-inputMask>
+        <div class="form-error" *ngIf="getErrorCondition('personalNumber')">{{ errors.required }}</div>
+      </div>
+      
+      <label class="ui-g-12 ui-md-6 ui-lg-4">
+        <label for="phone">მობილური</label>
+        <p-inputMask inputId="phone" mask="599-99-99-99" formControlName="phone" placeholder="599-99-99-99"></p-inputMask>
+        <div class="form-error" *ngIf="getErrorCondition('phone')">{{ errors.required }}</div>
+      </label>
+    </div>
+
+    <app-add-client-address
+      [parentInstance]="this"
+      [formGroup]="clientForm.get('legalAddress')"
+      [header]="'იურიდიული მისამართი'"></app-add-client-address>
+
+    <app-add-client-address
+      [parentInstance]="this"
+      [formGroup]="clientForm.get('actualAddress')"
+      [header]="'ფაქტიური მისამართი'"></app-add-client-address>
+    
+  </form>
+  <p-footer>
+    <button [disabled]="!clientForm.valid" (click)="saveClient()" type="button" pButton icon="pi pi-check" iconPos="left" label="შენახვა" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>

@@ -12,7 +12,7 @@ export class Client implements Deserializable {
   public surname: string;
   public sex: string;
   public personalNumber: number;
-  public phone: number;
+  public phone: string;
   public legalAddress: IAddress;
   public actualAddress: IAddress;
   public avatar: string;

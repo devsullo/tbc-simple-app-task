@@ -1,0 +1,22 @@
+<p-fieldset [legend]="header" [formGroup]="formGroup">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-6 ui-lg-4">
+      <label for="name">ქვეყანა</label>
+      <input pInputText id="country" type="text" name="country" formControlName="country" placeholder="შეიყვანეთ ქვეყანა">
+      <div class="form-error" *ngIf="parentInstance.getErrorCondition('country', formGroup)">
+        {{ parentInstance.errors.required }}</div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-4">
+      <label for="name">ქალაქი</label>
+      <input pInputText id="city" type="text" name="city" formControlName="city" placeholder="შეიყვანეთ ქალაქი">
+      <div class="form-error" *ngIf="parentInstance.getErrorCondition('city', formGroup)">
+        {{ parentInstance.errors.required }}</div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-4">
+      <label for="name">მისამართი</label>
+      <input pInputText id="address" type="text" name="address" formControlName="address" placeholder="შეიყვანეთ მისამართი">
+      <div class="form-error" *ngIf="parentInstance.getErrorCondition('address', formGroup)">
+        {{ parentInstance.errors.required }}</div>
+    </div>
+  </div>
+</p-fieldset>

@@ -6,19 +6,21 @@ import { AppComponent } from './app.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { AppStoreModule } from './store/app.store.module';
 import { SharedModule } from './shared/shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddClientComponent } from './pages/clients/add-client/add-client.component';
+import { AddClientAddressComponent } from './pages/clients/add-client/add-client-address/add-client-address.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientsComponent
+    ClientsComponent,
+    AddClientComponent,
+    AddClientAddressComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppStoreModule,
-    SharedModule,
-    BrowserAnimationsModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
