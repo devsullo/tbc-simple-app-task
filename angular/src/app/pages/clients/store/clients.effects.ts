@@ -17,9 +17,6 @@ export class ClientEffects {
     switchMap(() =>
       this.http.get(environment.apiUrl + '/clients').pipe(
         map((data: any[]) => {
-          if (!data.length) {
-            return;
-          }
           const clients = data.map(c => new Client().deserialize(c));
           return new clientActions.GetClientsCompleted(clients);
         })
