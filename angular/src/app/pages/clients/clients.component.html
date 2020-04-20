@@ -1,7 +1,7 @@
 <div class="page-wrapper">
   <p-toolbar>
     <div class="ui-toolbar-group-left">
-      <button pButton type="button" label="დამატება" icon="pi pi-plus"></button>
+      <button (click)="onAddClient()" pButton type="button" label="დამატება" icon="pi pi-plus"></button>
     </div>
   </p-toolbar>
   
@@ -31,6 +31,6 @@
       </tr>
     </ng-template>
   </p-table>
-  <app-add-client></app-add-client>
+  <app-add-client #addClientModal></app-add-client>
   <p-confirmDialog acceptLabel="დიახ" rejectLabel="არა" header="დადასტურება" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 </div>
