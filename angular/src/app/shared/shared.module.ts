@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputMaskModule } from 'primeng/inputmask';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FieldsetModule } from 'primeng/fieldset';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
@@ -34,7 +36,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     BrowserAnimationsModule,
     InputMaskModule,
     RadioButtonModule,
-    FieldsetModule
-  ]
+    FieldsetModule,
+    ConfirmDialogModule
+  ],
+  providers: [ConfirmationService]
 })
 export class SharedModule { }

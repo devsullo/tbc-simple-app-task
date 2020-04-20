@@ -25,6 +25,13 @@ export function clientsReducer(
         data: clients,
         loaded: true
       };
+    case clientActions.REMOVE_CLIENT_COMPLETED:
+      const newClients = state.data.filter(c => c.id !== action.payload);
+      return {
+        ...state,
+        data: newClients,
+        loaded: true
+      };
     default:
       return state;
   }

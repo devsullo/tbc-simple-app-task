@@ -39,6 +39,19 @@ export class ClientEffects {
     }
   ));
 
+  @Effect({ dispatch: true })
+  removeClient = this.actions$.pipe(
+    ofType(clientActions.REMOVE_CLIENT),
+    switchMap((action: clientActions.RemoveClient) => {
+      const clientId = action.payload;
+      return this.http.delete(environment.apiUrl + '/client/' + action.payload).pipe(
+        map(() => {
+          return new clientActions.RemoveClientComplated(clientId);
+        })
+      );
+    }
+    ));
+
   constructor(
     private actions$: Actions,
     private http: HttpClient

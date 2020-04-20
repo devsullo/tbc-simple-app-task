@@ -12,7 +12,7 @@ import * as clientActions from '../store/clients.actions';
 export class AddClientComponent implements OnInit {
 
   public title = 'კლიენტის დამატება';
-  public display = true;
+  public display = false;
   public clientForm: FormGroup;
   public nameRegExp: RegExp = /^(?!(?=.*[A-Za-z])(?=.*[ა-ჰ]))([A-Za-zა-ჰ]){2,50}$/;
   public errors = {
