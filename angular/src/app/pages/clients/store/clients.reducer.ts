@@ -18,6 +18,13 @@ export function clientsReducer(
         data: action.payload,
         loaded: true
       };
+    case clientActions.ADD_CLIENT_COMPLETED:
+      const clients = [...state.data, ...[action.payload]];
+      return {
+        ...state,
+        data: clients,
+        loaded: true
+      };
     default:
       return state;
   }

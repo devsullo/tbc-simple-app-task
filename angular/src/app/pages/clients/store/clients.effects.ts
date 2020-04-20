@@ -10,6 +10,7 @@ import { Client } from '../client.model';
 
 @Injectable()
 export class ClientEffects {
+
   @Effect({ dispatch: true })
   getClients = this.actions$.pipe(
     ofType(clientActions.GET_CLIENTS),
@@ -23,7 +24,20 @@ export class ClientEffects {
           return new clientActions.GetClientsCompleted(clients);
         })
       )
-    ));
+  ));
+
+  @Effect({ dispatch: true })
+  saveClient = this.actions$.pipe(
+    ofType(clientActions.ADD_CLIENT),
+    switchMap((action: clientActions.AddClient) => {
+      return this.http.post(environment.apiUrl + '/client', action.payload).pipe(
+        map((data: any) => {
+          const newClient = new Client().deserialize(data);
+          return new clientActions.AddClientCompleted(newClient);
+        })
+      );
+    }
+  ));
 
   constructor(
     private actions$: Actions,

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.store.module';
+import * as clientActions from '../store/clients.actions';
 
 @Component({
   selector: 'app-add-client',
@@ -18,7 +21,8 @@ export class AddClientComponent implements OnInit {
   };
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +52,9 @@ export class AddClientComponent implements OnInit {
 
   public saveClient() {
     const formValue = this.clientForm.value;
-    console.log(formValue, this.clientForm);
+    if (this.clientForm.valid) {
+      this.store.dispatch(new clientActions.AddClient(formValue));
+    }
   }
 
   public getErrorCondition(name: string, formGroup: FormGroup = this.clientForm) {
