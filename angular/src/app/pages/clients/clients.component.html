@@ -30,13 +30,18 @@
         <td>
           <button pButton [matMenuTriggerFor]="menu" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onEditClient(client.id)"><i class="pi pi-fw pi-pencil"></i> რედაქტირება</button>
-            <button mat-menu-item (click)="onDeleteClient(client.id)"><i class="pi pi-fw pi-trash"></i> წაშლა</button>
+            <button mat-menu-item (click)="onEditClient(client.id)">
+              <i class="pi pi-fw pi-pencil"></i> რედაქტირება
+            </button>
+            <button mat-menu-item (click)="onDeleteClient(client.id)">
+              <i class="pi pi-fw pi-trash"></i> წაშლა
+            </button>
           </mat-menu>
         </td>
       </tr>
     </ng-template>
   </p-table>
   <app-add-client #addClientModal></app-add-client>
+  <app-edit-client #editClientModal></app-edit-client>
   <p-confirmDialog acceptLabel="დიახ" rejectLabel="არა" header="დადასტურება" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 </div>

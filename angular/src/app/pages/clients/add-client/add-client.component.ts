@@ -21,11 +21,11 @@ export class AddClientComponent implements OnInit {
   };
 
   constructor(
-    private fb: FormBuilder,
-    private store: Store<fromApp.AppState>
+    protected fb: FormBuilder,
+    protected store: Store<fromApp.AppState>
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initForm();
   }
 

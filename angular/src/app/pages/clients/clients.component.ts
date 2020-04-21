@@ -4,8 +4,9 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.store.module';
 import * as clientActions from './store/clients.actions';
 import { Client } from './client.model';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { AddClientComponent } from './add-client/add-client.component';
+import { EditClientComponent } from './edit-client/edit-client.component';
 
 
 @Component({
@@ -17,6 +18,9 @@ export class ClientsComponent implements OnInit {
 
   @ViewChild('addClientModal')
   public addClientModal: AddClientComponent;
+
+  @ViewChild('editClientModal')
+  public editClientModal: EditClientComponent;
 
   public clients: fromApp.ICollection<Client>;
 
@@ -47,7 +51,7 @@ export class ClientsComponent implements OnInit {
   }
 
   public onEditClient(clientId: number) {
-
+    this.editClientModal.showDialog();
   }
 
 }
