@@ -47,7 +47,20 @@ export class ClientEffects {
         })
       );
     }
-    ));
+  ));
+
+  @Effect({ dispatch: true })
+  updateClient = this.actions$.pipe(
+    ofType(clientActions.UPDATE_CLIENT),
+    switchMap((action: clientActions.UpdateClient) => {
+      return this.http.put(environment.apiUrl + '/client/' + action.payload.id, action.payload).pipe(
+        map((data: any) => {
+          const newClient = new Client().deserialize(data);
+          return new clientActions.UpdateClientComplated(newClient);
+        })
+      );
+    }
+  ));
 
   constructor(
     private actions$: Actions,

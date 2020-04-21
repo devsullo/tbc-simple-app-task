@@ -32,6 +32,14 @@ export function clientsReducer(
         data: newClients,
         loaded: true
       };
+    case clientActions.UPDATE_CLIENT_COMPLETED:
+      const oldIndex = state.data.findIndex(({ id }) => id === action.payload.id);
+      const updatedClients = Object.assign([...state.data], { [oldIndex]: action.payload });
+      return {
+        ...state,
+        data: updatedClients,
+        loaded: true
+      };
     default:
       return state;
   }

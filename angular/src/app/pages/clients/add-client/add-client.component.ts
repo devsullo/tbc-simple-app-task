@@ -31,6 +31,7 @@ export class AddClientComponent implements OnInit {
 
   private initForm() {
     this.clientForm = this.fb.group({
+      id: [''],
       name: ['', Validators.required],
       surname: ['', Validators.required],
       sex: ['', Validators.required],

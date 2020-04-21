@@ -50,8 +50,8 @@ export class ClientsComponent implements OnInit {
     });
   }
 
-  public onEditClient(clientId: number) {
-    this.editClientModal.showDialog();
+  public onEditClient(client: Client) {
+    this.editClientModal.openModal(client);
   }
 
 }

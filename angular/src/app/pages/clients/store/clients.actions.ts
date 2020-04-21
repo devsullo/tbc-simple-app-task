@@ -7,6 +7,24 @@ export const ADD_CLIENT = 'ADD_CLIENT';
 export const ADD_CLIENT_COMPLETED = 'ADD_CLIENT_COMPLETED';
 export const REMOVE_CLIENT = 'REMOVE_CLIENT';
 export const REMOVE_CLIENT_COMPLETED = 'REMOVE_CLIENT_COMPLETED';
+export const UPDATE_CLIENT = 'UPDATE_CLIENT';
+export const UPDATE_CLIENT_COMPLETED = 'UPDATE_CLIENT_COMPLETED';
+
+export class UpdateClient implements Action {
+  readonly type = UPDATE_CLIENT;
+
+  constructor(
+    public payload: any
+  ) { }
+}
+
+export class UpdateClientComplated implements Action {
+  readonly type = UPDATE_CLIENT_COMPLETED;
+
+  constructor(
+    public payload: Client
+  ) { }
+}
 
 export class RemoveClient implements Action {
   readonly type = REMOVE_CLIENT;
@@ -53,6 +71,8 @@ export class GetClients implements Action {
 }
 
 export type clientActions =
+  | UpdateClient
+  | UpdateClientComplated
   | RemoveClient
   | RemoveClientComplated
   | AddClient

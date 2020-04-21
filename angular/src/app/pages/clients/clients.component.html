@@ -30,7 +30,7 @@
         <td>
           <button pButton [matMenuTriggerFor]="menu" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onEditClient(client.id)">
+            <button mat-menu-item (click)="onEditClient(client)">
               <i class="pi pi-fw pi-pencil"></i> რედაქტირება
             </button>
             <button mat-menu-item (click)="onDeleteClient(client.id)">

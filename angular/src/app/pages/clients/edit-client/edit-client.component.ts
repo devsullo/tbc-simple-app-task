@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import * as fromApp from '../../../store/app.store.module';
 import * as clientActions from '../store/clients.actions';
 import { Store } from '@ngrx/store';
+import { Client } from '../client.model';
 
 @Component({
   selector: 'app-edit-client',
@@ -22,6 +23,22 @@ export class EditClientComponent extends AddClientComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+
+  public openModal(client: Client) {
+    this.fillForm(client);
+    this.showDialog();
+  }
+
+  private fillForm(client: Client) {
+    this.clientForm.patchValue(client);
+  }
+
+  public saveClient() {
+    const formValue = this.clientForm.value;
+    if (this.clientForm.valid) {
+      this.store.dispatch(new clientActions.UpdateClient(formValue));
+    }
   }
 
 }
