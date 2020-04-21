@@ -7,6 +7,7 @@ import { Client } from './client.model';
 import { ConfirmationService } from 'primeng/api';
 import { AddClientComponent } from './add-client/add-client.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -52,6 +53,12 @@ export class ClientsComponent implements OnInit {
 
   public onEditClient(client: Client) {
     this.editClientModal.openModal(client);
+  }
+
+  public getAvatar(avatar) {
+    return !avatar ?
+      '/assets/images/default-avatar.png' :
+      environment.uploadDir + avatar;
   }
 
 }

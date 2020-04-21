@@ -21,7 +21,12 @@
     <ng-template pTemplate="body" let-client>
       <tr>
         <td>{{client.id}}</td>
-        <td>{{client.name + ' ' + client.surname}}</td>
+        <td>
+          <img class="avatar" [src]="getAvatar(client.avatar)" alt="Avatar" width="32" style="vertical-align: middle"> 
+          <span style="vertical-align: middle; margin-left: .5em">
+            {{client.name + ' ' + client.surname}}
+          </span>
+        </td>
         <td>{{client.sex}}</td>
         <td>{{client.personalNumber}}</td>
         <td>{{client.phone}}</td>

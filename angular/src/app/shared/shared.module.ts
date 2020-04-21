@@ -15,8 +15,9 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { MatMenuModule } from '@angular/material/menu';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -39,8 +40,9 @@ import { MatMenuModule } from '@angular/material/menu';
     RadioButtonModule,
     FieldsetModule,
     ConfirmDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    FileUploadModule
   ],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class SharedModule { }

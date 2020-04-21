@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.store.module';
 import * as clientActions from '../store/clients.actions';
-
+import { MessageService } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-add-client',
   templateUrl: './add-client.component.html',
@@ -19,11 +20,17 @@ export class AddClientComponent implements OnInit {
     required: 'ველი სავალდებულოა',
     name: 'ველი უნდა შეიცავდეს 2-50 სიმბოლოს, უნდა იყოს მხოლოდ ქართული ან ლათინური ანბანის ასოები',
   };
+  public environment = environment;
 
   constructor(
     protected fb: FormBuilder,
-    protected store: Store<fromApp.AppState>
+    protected store: Store<fromApp.AppState>,
+    protected messageService: MessageService
   ) { }
+
+  get avatar() {
+    return this.clientForm.get('avatar');
+  }
 
   public ngOnInit(): void {
     this.initForm();
@@ -49,6 +56,18 @@ export class AddClientComponent implements OnInit {
       }),
       avatar: ['']
     });
+  }
+
+  public onUpload(event) {
+    if (event.files) {
+      const fileName = event.files[0].name;
+      this.avatar.setValue(fileName);
+    }
+    this.messageService.add({ severity: 'info', summary: 'ფაილი აიტვირთა', detail: '' });
+  }
+
+  public getAvatar() {
+    return environment.uploadDir + this.avatar.value;
   }
 
   public saveClient() {

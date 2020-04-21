@@ -2,11 +2,15 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
+app.use(fileUpload());
+app.use(express.static('public'));
+app.use('/uploads', express.static(__dirname + '/public'));
 
 const clients = [
   {
@@ -26,7 +30,7 @@ const clients = [
       city: 'ქუთაისი',
       address: 'ფარნავაზ მეფის ქუჩა'
     },
-    avatar: '/',
+    avatar: '',
   }
 ];
 
@@ -131,6 +135,21 @@ app.post('/account/close/:id', (req, res) => {
   }
 
   res.status(404).send('Account not found');
+});
+
+// Image upload
+app.post('/upload', function (req, res) {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded');
+  }
+
+  const avatar = req.files.avatar;
+  avatar.mv('public/uploads/' + avatar.name , function (err) {
+    if (err)
+      return res.status(500).send(err);
+
+    res.send({ fileName: avatar.name});
+  });
 });
 
 app.listen(3000, () => console.log('API started at http://localhost:3000/'));

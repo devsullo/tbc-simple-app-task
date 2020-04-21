@@ -2,6 +2,23 @@
 
   <form #form [formGroup]="clientForm">
     <div class="ui-g ui-fluid">
+      <div class="ui-g-12">
+        <p-fileUpload
+          chooseLabel="ფოტოს არჩევა"
+          uploadLabel="ატვირთვა"
+          cancelLabel="წაშლა"
+          name="avatar"
+          [url]="environment.apiUrl + '/upload'"
+          (onUpload)="onUpload($event)" multiple="multiple" accept="image/*"
+          maxFileSize="1000000">
+          <ng-template pTemplate="content">
+            <img *ngIf="avatar.value" class="avatar" [src]="getAvatar()" alt="Avatar">
+          </ng-template>
+        </p-fileUpload>
+      </div>
+    </div>
+
+    <div class="ui-g ui-fluid">
       <div class="ui-g-12 ui-md-6 ui-lg-6">
         <label for="name">სახელი</label>
         <input id="name" type="text" name="name" formControlName="name" pInputText [pKeyFilter]="nameRegExp"

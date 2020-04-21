@@ -6,6 +6,7 @@ import * as fromApp from '../../../store/app.store.module';
 import * as clientActions from '../store/clients.actions';
 import { Store } from '@ngrx/store';
 import { Client } from '../client.model';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-edit-client',
@@ -17,8 +18,9 @@ export class EditClientComponent extends AddClientComponent implements OnInit {
   constructor(
     protected fb: FormBuilder,
     protected store: Store<fromApp.AppState>,
+    protected messageService: MessageService
   ) {
-    super(fb, store);
+    super(fb, store, messageService);
   }
 
   ngOnInit(): void {
