@@ -27,7 +27,13 @@
         <td>{{client.phone}}</td>
         <td>{{client.legalAddress.country + ', ' + client.legalAddress.city}}</td>
         <td>{{client.actualAddress.country + ', ' + client.actualAddress.city}}</td>
-        <td><button (click)="deleteClient(client.id)" pButton type="button" label="წაშლა" class="ui-button-danger"></button></td>
+        <td>
+          <button pButton [matMenuTriggerFor]="menu" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onEditClient(client.id)"><i class="pi pi-fw pi-pencil"></i> რედაქტირება</button>
+            <button mat-menu-item (click)="onDeleteClient(client.id)"><i class="pi pi-fw pi-trash"></i> წაშლა</button>
+          </mat-menu>
+        </td>
       </tr>
     </ng-template>
   </p-table>

@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
@@ -92,11 +94,11 @@ app.put('/client/:id', (req, res) => {
 // Delete client
 app.delete('/client/:id', (req, res) => {
   const clientId = Number(req.params.id);
-  const removeIndex = clients.map((c) => { return c.id; }).indexOf(clientId);
+  const removeIndex = clients.findIndex(c => c.id === clientId);
 
   if (removeIndex >= 0) {
     clients.splice(removeIndex, 1);
-    res.send('Client has been deleted');
+    res.send({ id: clientId });
     return;
   }
 

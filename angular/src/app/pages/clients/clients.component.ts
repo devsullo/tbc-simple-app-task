@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.store.module';
 import * as clientActions from './store/clients.actions';
 import { Client } from './client.model';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { AddClientComponent } from './add-client/add-client.component';
 
 
@@ -14,7 +14,7 @@ import { AddClientComponent } from './add-client/add-client.component';
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  
+
   @ViewChild('addClientModal')
   public addClientModal: AddClientComponent;
 
@@ -37,13 +37,17 @@ export class ClientsComponent implements OnInit {
     this.addClientModal.showDialog();
   }
 
-  public deleteClient(clientId: number) {
+  public onDeleteClient(clientId: number) {
     this.confirmationService.confirm({
       message: 'ნამდვილად გსურთ წაშლა',
       accept: () => {
         this.store.dispatch(new clientActions.RemoveClient(clientId));
       }
     });
+  }
+
+  public onEditClient(clientId: number) {
+
   }
 
 }

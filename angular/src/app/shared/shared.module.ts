@@ -16,6 +16,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,8 @@ import { ConfirmationService } from 'primeng/api';
     InputMaskModule,
     RadioButtonModule,
     FieldsetModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MatMenuModule
   ],
   providers: [ConfirmationService]
 })
