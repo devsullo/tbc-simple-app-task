@@ -5,35 +5,51 @@
     </div>
   </p-toolbar>
   
-  <p-table [value]="clients.data" [paginator]="true" [rows]="10">
+  <p-table (onFilter)="onFilter($event)" (onSort)="onSort($event)" sortField="id" #dataTable [value]="clientsData" dataKey="id" styleClass="ui-table-customers" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="!clients.loaded"
+    [paginator]="true" currentPageReportTemplate="ნაჩვენებია {first}-{last} მდე {totalRecords} დან"
+    [filterDelay]="0" [globalFilterFields]="globalFilterFields">
+    <ng-template pTemplate="caption">
+      კლიენტების სია
+      <div class="ui-table-globalfilter-container">
+        <input pInputText type="text" [(ngModel)]="globalSearchInput"
+          (input)="dataTable.filterGlobal($event.target.value, 'contains')"
+          placeholder="ძებნა ყველა ფილდში" />
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>ნომერი</th>
-        <th>კლიენტი</th>
-        <th>სქესი</th>
-        <th>პირადი ნომერი</th>
-        <th>მობილური</th>
-        <th>იურიდიული მისამართი</th>
-        <th>ფაქტიური მისამართი</th>
+        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+          {{ col.th }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+      <tr>
+        <th *ngFor="let col of cols">
+          <input pInputText type="text" [(ngModel)]="col.value"
+            (input)="dataTable.filter(col.value, col.field, 'contains')"
+            [placeholder]="col.placeholder" class="ui-column-filter">
+        </th>
         <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-client>
       <tr>
-        <td>{{client.id}}</td>
-        <td>
-          <img class="avatar" [src]="getAvatar(client.avatar)" alt="Avatar" width="32" style="vertical-align: middle"> 
-          <span style="vertical-align: middle; margin-left: .5em">
-            {{client.name + ' ' + client.surname}}
+        <td *ngFor="let col of cols">
+          <span *ngIf="col.field !== 'fullName' else fna">
+            {{ client[col.field] }}
           </span>
+          <ng-template #fna>
+            <img class="avatar" [src]="client.avatarUrl" alt="Avatar" width="32" style="vertical-align: middle">
+            <span style="vertical-align: middle; margin-left: .5em">
+              {{client.fullName}}
+            </span>
+          </ng-template>
         </td>
-        <td>{{client.sex}}</td>
-        <td>{{client.personalNumber}}</td>
-        <td>{{client.phone}}</td>
-        <td>{{client.legalAddress.country + ', ' + client.legalAddress.city}}</td>
-        <td>{{client.actualAddress.country + ', ' + client.actualAddress.city}}</td>
         <td>
-          <button pButton [matMenuTriggerFor]="menu" type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
+          <button pButton [matMenuTriggerFor]="menu"
+            type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onEditClient(client)">
               <i class="pi pi-fw pi-pencil"></i> რედაქტირება

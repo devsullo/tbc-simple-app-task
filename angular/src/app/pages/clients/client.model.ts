@@ -1,4 +1,5 @@
 import { Deserializable } from 'src/app/shared/deserializable.model';
+import { environment } from 'src/environments/environment';
 
 export interface IAddress {
   country: string;
@@ -7,6 +8,25 @@ export interface IAddress {
 }
 
 export class Client implements Deserializable {
+
+  get fullName(): string {
+    return `${this.name} ${this.surname}`;
+  }
+
+  get fullLegalAddress(): string {
+    return `${this.legalAddress.country}, ${this.legalAddress.city}`;
+  }
+
+  get fullActualAddress(): string {
+    return `${this.legalAddress.country}, ${this.legalAddress.city}`;
+  }
+
+  get avatarUrl() {
+    return !this.avatar ?
+      '/assets/images/default-avatar.png' :
+      environment.uploadDir + this.avatar;
+  }
+
   public id: number;
   public name: string;
   public surname: string;

@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +41,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     FieldsetModule,
     ConfirmDialogModule,
     MatMenuModule,
-    FileUploadModule
+    FileUploadModule,
+    FormsModule
   ],
   providers: [ConfirmationService, MessageService]
 })
