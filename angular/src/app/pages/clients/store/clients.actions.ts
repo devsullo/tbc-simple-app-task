@@ -14,8 +14,24 @@ export const GET_CLIENT_DETAILS = 'GET_CLIENT_DETAILS';
 export const GET_CLIENT_DETAILS_COMPLETED = 'GET_CLIENT_DETAILS_COMPLETED';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';
 export const ADD_ACCOUNT_COMPLETED = 'ADD_ACCOUNT_COMPLETED';
-// export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';
-// export const CLOSE_ACCOUNT_COMPLETED = 'CLOSE_ACCOUNT_COMPLETED';
+export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';
+export const CLOSE_ACCOUNT_COMPLETED = 'CLOSE_ACCOUNT_COMPLETED';
+
+export class CloseAccount implements Action {
+  readonly type = CLOSE_ACCOUNT;
+
+  constructor(
+    public payload: number
+  ) { }
+}
+
+export class CloseAccountComplated implements Action {
+  readonly type = CLOSE_ACCOUNT_COMPLETED;
+
+  constructor(
+    public payload: Client
+  ) { }
+}
 
 export class AddAccount implements Action {
   readonly type = ADD_ACCOUNT;

@@ -88,6 +88,18 @@ export class ClientEffects {
     }
     ));
 
+  @Effect({ dispatch: true })
+  closeAccount = this.actions$.pipe(
+    ofType(clientActions.CLOSE_ACCOUNT),
+    switchMap((action: clientActions.CloseAccount) => {
+      return this.http.put(environment.apiUrl + '/account/close/' + action.payload, {}).pipe(
+        map((data: any) => {
+          return new clientActions.GetClientDetails(data.clientId);
+        })
+      );
+    }
+    ));
+
   constructor(
     private actions$: Actions,
     private http: HttpClient
