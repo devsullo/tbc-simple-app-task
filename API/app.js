@@ -19,7 +19,7 @@ const clients = [
     surname: 'სულაბერიძე',
     sex: 'კაცი',
     personalNumber: 60001138452,
-    phone: 598345668,
+    phone: '598-34-56-68',
     legalAddress: {
       country: 'საქართველო',
       city: 'თბილისი',
@@ -115,6 +115,7 @@ app.post('/account', (req, res) => {
 
   if(clients.find(c => c.id === clientId)){
     const account = setUniqueNumber(req.body);
+    account.status = 'აქტიური';
     accounts.push(account);
     res.send(account);
     return;
