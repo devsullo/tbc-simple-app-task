@@ -69,8 +69,6 @@ export class ClientsComponent implements OnInit, AfterViewInit {
         this.clientsData = [...this.clients.data];
       }
     });
-
-    this.store.dispatch(new clientActions.GetClients());
   }
 
   ngAfterViewInit() {
@@ -138,6 +136,10 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
   public onEditClient(client: Client) {
     this.editClientModal.openModal(client);
+  }
+
+  public onClientClick(e: MouseEvent, client: Client) {
+    this.router.navigate(['client/' + client.id]);
   }
 
 }

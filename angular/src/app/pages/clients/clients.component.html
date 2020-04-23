@@ -38,7 +38,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-client>
-      <tr>
+      <tr class="ui-selectable-row" (click)="onClientClick($event, client)">
         <td *ngFor="let col of cols">
           <span *ngIf="col.field !== 'fullName' else fna">
             {{ client[col.field] }}
@@ -51,7 +51,7 @@
           </ng-template>
         </td>
         <td>
-          <button pButton [matMenuTriggerFor]="menu"
+          <button pButton (click)="$event.stopPropagation();" [matMenuTriggerFor]="menu"
             type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onEditClient(client)">

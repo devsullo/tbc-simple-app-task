@@ -1,0 +1,47 @@
+.client-table {
+  border: 0;
+  width: 100%;
+}
+
+.client-table thead {
+  display: none;
+}
+
+.client-table tr {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.client-table td {
+  display: block;
+  text-align: right;
+  border: 0;
+  border-bottom: 1px dotted #e1e1e1;
+  padding: 15px;
+}
+
+.client-table td:last-of-type {
+  border-bottom: 0;
+}
+
+.client-table td:before {
+  content: attr(data-label);
+  float: left;
+  font-weight: bold;
+}
+
+.client-avatar:before {
+  display: none;
+}
+
+.client-table .client-avatar {
+  text-align: center;
+}
+
+.avatar {
+  text-align: center;
+  img {
+    width: 80px;
+    border-radius: 50%;
+  }
+}

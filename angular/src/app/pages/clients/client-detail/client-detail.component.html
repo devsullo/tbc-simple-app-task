@@ -1,0 +1,75 @@
+<div class="page-wrapper">
+  <p-card>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-6">
+        <ng-container *ngIf="client">
+          <div class="avatar">
+            <img [src]="client.avatarUrl">
+          </div>
+          <table class="client-table">
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td data-label="ნომერი">#{{ client.id }}</td>
+              <td data-label="კლიენტი">{{ client.fullName }}</td>
+              <td data-label="პირადი ნომერი">{{ client.personalNumber }}</td>
+              <td data-label="სქესი">{{ client.sex }}</td>
+              <td data-label="ტელეფონი">{{ client.phone }}</td>
+              <td data-label="ფაქტიური მისამართი">{{ client.fullActualAddress }}</td>
+              <td data-label="იურიდიული მისამართი">{{ client.fullLegalAddress }}</td>
+            </tr>
+          </table>
+        </ng-container>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-6">
+        <div class="ui-g ui-fluid">
+          <h2>ანგარიშები</h2>
+        </div>
+        <div class="ui-g ui-fluid">
+          
+          <div class="ui-g-12">
+            <form (submit)="onFormSubmit()" [formGroup]="accountForm">
+              <p-fieldset legend="ანგარიშის დამატება" >
+                <div class="ui-g-6">
+                  <p-dropdown formControlName="type" [options]="accountTypeOptions" placeholder="აირჩიეთ ტიპი" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="ui-g-6">
+                  <p-multiSelect formControlName="currency" [options]="accountCurrencyOptions"
+                    defaultLabel="აირჩიეთ ვალუტა" maxSelectedLabels="4" [filter]="false"></p-multiSelect>
+                </div>
+                <div class="ui-g-12">
+                  <button [disabled]="!accountForm.valid" type="submit" pButton icon="pi pi-check" iconPos="left" label="დამატება"
+                    class="ui-button-success"></button>
+                </div>
+              </p-fieldset>
+            
+            </form>
+          </div>
+
+          <!-- <div class="ui-g-12">
+            <p-table [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" #dataTable [value]="{}" dataKey="id"
+              styleClass="ui-table-customers" [rowHover]="true" [paginator]="true"
+              currentPageReportTemplate="ნაჩვენებია {first}-{last} მდე {totalRecords} დან" [filterDelay]="0" [loading]="false">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>ანგ. ნომერი</th>
+                  <th>ტიპი</th>
+                  <th>ვალუტა</th>
+                  <th>სტატუსი</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-car>
+                <tr>
+                  <td></td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div> -->
+          
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>

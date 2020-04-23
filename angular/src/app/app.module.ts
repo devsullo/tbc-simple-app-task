@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { AddClientComponent } from './pages/clients/add-client/add-client.component';
 import { AddClientAddressComponent } from './pages/clients/add-client/add-client-address/add-client-address.component';
 import { EditClientComponent } from './pages/clients/edit-client/edit-client.component';
+import { ClientDetailComponent } from './pages/clients/client-detail/client-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EditClientComponent } from './pages/clients/edit-client/edit-client.com
     ClientsComponent,
     AddClientComponent,
     AddClientAddressComponent,
-    EditClientComponent
+    EditClientComponent,
+    ClientDetailComponent
   ],
   imports: [
     BrowserModule,

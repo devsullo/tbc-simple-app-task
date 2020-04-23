@@ -14,11 +14,11 @@ export class Client implements Deserializable {
   }
 
   get fullLegalAddress(): string {
-    return `${this.legalAddress.country}, ${this.legalAddress.city}`;
+    return `${this.legalAddress.country}, ${this.legalAddress.city}, ${this.legalAddress.address}`;
   }
 
   get fullActualAddress(): string {
-    return `${this.legalAddress.country}, ${this.legalAddress.city}`;
+    return `${this.actualAddress.country}, ${this.actualAddress.city}, ${this.actualAddress.address}`;
   }
 
   get avatarUrl() {

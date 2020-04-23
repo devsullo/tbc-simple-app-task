@@ -18,6 +18,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { MatMenuModule } from '@angular/material/menu';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CardModule } from 'primeng/card';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 
 @NgModule({
   declarations: [],
@@ -42,7 +46,10 @@ import { FileUploadModule } from 'primeng/fileupload';
     ConfirmDialogModule,
     MatMenuModule,
     FileUploadModule,
-    FormsModule
+    FormsModule,
+    CardModule,
+    DropdownModule,
+    MultiSelectModule
   ],
   providers: [ConfirmationService, MessageService]
 })
