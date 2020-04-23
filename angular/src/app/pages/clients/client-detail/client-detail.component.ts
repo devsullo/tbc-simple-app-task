@@ -39,8 +39,8 @@ export class ClientDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
     const clientId = Number(this.activatedRoute.snapshot.params.id);
+    this.initForm(clientId);
     this.store.dispatch(new clientActions.GetClientDetails(clientId));
 
     this.store.select('clients').pipe(filter(c => c.loaded))
@@ -50,9 +50,9 @@ export class ClientDetailComponent implements OnInit {
       });
   }
 
-  private initForm() {
+  private initForm(clientId: number) {
     this.accountForm = this.fb.group({
-      clientId: [null],
+      clientId: [clientId],
       type: ['', Validators.required],
       currency: ['', Validators.required],
     });
@@ -62,7 +62,8 @@ export class ClientDetailComponent implements OnInit {
     if (!this.accountForm.valid) {
       return;
     }
-    console.log(this.accountForm.value)
+    console.log(this.accountForm.value);
+    this.store.dispatch(new clientActions.AddAccount(this.accountForm.value));
     this.accountForm.reset();
   }
 

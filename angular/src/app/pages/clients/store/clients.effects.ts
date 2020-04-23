@@ -76,6 +76,18 @@ export class ClientEffects {
       )
     ));
 
+  @Effect({ dispatch: true })
+  addAccount = this.actions$.pipe(
+    ofType(clientActions.ADD_ACCOUNT),
+    switchMap((action: clientActions.AddAccount) => {
+      return this.http.post(environment.apiUrl + '/account', action.payload).pipe(
+        map((data: any) => {
+          return new clientActions.GetClientDetails(data.clientId);
+        })
+      );
+    }
+    ));
+
   constructor(
     private actions$: Actions,
     private http: HttpClient
