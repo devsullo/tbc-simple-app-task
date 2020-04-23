@@ -4,15 +4,18 @@
       <button (click)="onAddClient()" pButton type="button" label="დამატება" icon="pi pi-plus"></button>
     </div>
   </p-toolbar>
-  
-  <p-table (onFilter)="onFilter($event)" (onSort)="onSort($event)" sortField="id" #dataTable [value]="clientsData" dataKey="id" styleClass="ui-table-customers" [rowHover]="true"
-    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="!clients.loaded"
+
+  <p-table (onFilter)="onFilter()" (onSort)="onSort($event)" (onPage)="onPage($event)"
+    [sortField]="queryParams.sortField" [sortOrder]="queryParams.sortOrder"
+    [first]="queryParams.first" [rows]="queryParams.rows"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+    #dataTable [value]="clientsData" dataKey="id" styleClass="ui-table-customers" [rowHover]="true"
     [paginator]="true" currentPageReportTemplate="ნაჩვენებია {first}-{last} მდე {totalRecords} დან"
-    [filterDelay]="0" [globalFilterFields]="globalFilterFields">
+    [filterDelay]="0" [globalFilterFields]="globalFilterFields" [loading]="!clients.loaded">
     <ng-template pTemplate="caption">
       კლიენტების სია
       <div class="ui-table-globalfilter-container">
-        <input pInputText type="text" [(ngModel)]="globalSearchInput"
+        <input pInputText type="text" [(ngModel)]="queryParams.global"
           (input)="dataTable.filterGlobal($event.target.value, 'contains')"
           placeholder="ძებნა ყველა ფილდში" />
       </div>
