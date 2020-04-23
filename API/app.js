@@ -125,7 +125,7 @@ app.post('/account', (req, res) => {
 });
 
 // Close account
-app.post('/account/close/:id', (req, res) => {
+app.put('/account/close/:id', (req, res) => {
   const accountId = Number(req.params.id);
   const account = accounts.find(a => a.id === accountId);
 
