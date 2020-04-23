@@ -68,7 +68,9 @@
                     <td>{{ account.type }}</td>
                     <td>{{ account.currency }}</td>
                     <td>
-                      <span [class]="'customer-badge status-qualified'">{{ account.status }}</span>
+                      <span class="customer-badge" [class]="account.status === 'აქტიური' ? 'active' : 'unactive'">
+                        {{ account.status }}
+                      </span>
                     </td>
                     <td>
                       <button pButton (click)="$event.stopPropagation();"

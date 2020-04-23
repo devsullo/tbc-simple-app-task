@@ -82,12 +82,12 @@
     font-size: 12px;
     letter-spacing: .3px;
 
-    &.status-qualified {
+    &.active {
       background-color: #C8E6C9;
       color: #256029;
     }
 
-    &.status-unqualified {
+    &.unactive {
       background-color: #FFCDD2;
       color: #C63737;
     }
