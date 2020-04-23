@@ -62,6 +62,20 @@ export class ClientEffects {
     }
   ));
 
+  // Client details
+
+  @Effect({ dispatch: true })
+  getClientDetails = this.actions$.pipe(
+    ofType(clientActions.GET_CLIENT_DETAILS),
+    switchMap((action: clientActions.GetClientDetails) =>
+      this.http.get(environment.apiUrl + '/client/' + action.payload).pipe(
+        map((data: any) => {
+          const newClient = new Client().deserialize(data);
+          return new clientActions.GetClientDetailsCompleted(newClient);
+        })
+      )
+    ));
+
   constructor(
     private actions$: Actions,
     private http: HttpClient

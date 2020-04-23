@@ -10,6 +10,29 @@ export const REMOVE_CLIENT_COMPLETED = 'REMOVE_CLIENT_COMPLETED';
 export const UPDATE_CLIENT = 'UPDATE_CLIENT';
 export const UPDATE_CLIENT_COMPLETED = 'UPDATE_CLIENT_COMPLETED';
 
+export const GET_CLIENT_DETAILS = 'GET_CLIENT_DETAILS';
+export const GET_CLIENT_DETAILS_COMPLETED = 'GET_CLIENT_DETAILS_COMPLETED';
+// export const ADD_ACCOUNT = 'ADD_ACCOUNT';
+// export const ADD_ACCOUNT_COMPLETED = 'ADD_ACCOUNT_COMPLETED';
+// export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';
+// export const CLOSE_ACCOUNT_COMPLETED = 'CLOSE_ACCOUNT_COMPLETED';
+
+export class GetClientDetailsCompleted implements Action {
+  readonly type = GET_CLIENT_DETAILS_COMPLETED;
+
+  constructor(
+    public payload: Client
+  ) { }
+}
+
+export class GetClientDetails implements Action {
+  readonly type = GET_CLIENT_DETAILS;
+
+  constructor(
+    public payload: number
+  ) { }
+}
+
 export class UpdateClient implements Action {
   readonly type = UPDATE_CLIENT;
 
@@ -71,6 +94,8 @@ export class GetClients implements Action {
 }
 
 export type clientActions =
+  | GetClientDetails
+  | GetClientDetailsCompleted
   | UpdateClient
   | UpdateClientComplated
   | RemoveClient

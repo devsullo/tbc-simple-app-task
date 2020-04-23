@@ -40,12 +40,13 @@ export class ClientDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    const clientId = Number(this.activatedRoute.snapshot.params.id);
+    this.store.dispatch(new clientActions.GetClientDetails(clientId));
 
     this.store.select('clients').pipe(filter(c => c.loaded))
       .subscribe(clients => {
-        const id = Number(this.activatedRoute.snapshot.params.id);
-        this.client = clients.data.find(c => c.id === id);
-        console.log(id, clients, this.client)
+        this.client = clients.data.find(c => c.id === clientId);
+        console.log(clientId, clients, this.client);
       });
   }
 

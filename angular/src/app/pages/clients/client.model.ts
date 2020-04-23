@@ -1,5 +1,6 @@
 import { Deserializable } from 'src/app/shared/deserializable.model';
 import { environment } from 'src/environments/environment';
+import { Account } from './client-detail/account.model';
 
 export interface IAddress {
   country: string;
@@ -36,9 +37,13 @@ export class Client implements Deserializable {
   public legalAddress: IAddress;
   public actualAddress: IAddress;
   public avatar: string;
+  public accounts: Account[] = [];
 
   public deserialize(input: any) {
     Object.assign(this, input);
+    if (input.accounts && input.accounts.length) {
+      this.accounts = input.accounts.map(a => new Account().deserialize(a));
+    }
     return this;
   }
 }
