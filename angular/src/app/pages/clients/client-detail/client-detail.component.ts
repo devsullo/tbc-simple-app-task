@@ -32,6 +32,8 @@ export class ClientDetailComponent implements OnInit {
 
   public accountForm: FormGroup;
 
+  public clientId: number;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store<fromApp.AppState>,
@@ -39,20 +41,20 @@ export class ClientDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const clientId = Number(this.activatedRoute.snapshot.params.id);
-    this.initForm(clientId);
-    this.store.dispatch(new clientActions.GetClientDetails(clientId));
+    this.clientId = Number(this.activatedRoute.snapshot.params.id);
+    this.initForm();
+    this.store.dispatch(new clientActions.GetClientDetails(this.clientId));
 
     this.store.select('clients').pipe(filter(c => c.loaded))
       .subscribe(clients => {
-        this.client = clients.data.find(c => c.id === clientId);
-        console.log(clientId, clients, this.client);
+        this.client = clients.data.find(c => c.id === this.clientId);
+        console.log(this.clientId, clients, this.client);
       });
   }
 
-  private initForm(clientId: number) {
+  private initForm() {
     this.accountForm = this.fb.group({
-      clientId: [clientId],
+      clientId: [],
       type: ['', Validators.required],
       currency: ['', Validators.required],
     });
@@ -62,8 +64,10 @@ export class ClientDetailComponent implements OnInit {
     if (!this.accountForm.valid) {
       return;
     }
-    console.log(this.accountForm.value);
-    this.store.dispatch(new clientActions.AddAccount(this.accountForm.value));
+    this.accountForm.get('clientId').setValue(this.clientId);
+    const formValue = this.accountForm.value;
+    console.log(formValue);
+    this.store.dispatch(new clientActions.AddAccount(formValue));
     this.accountForm.reset();
   }
 
