@@ -71,8 +71,8 @@ export class ClientDetailComponent implements OnInit {
     this.accountForm.reset();
   }
 
-  public onCloseAccount() {
-    this.store.dispatch(new clientActions.CloseAccount(this.clientId));
+  public onCloseAccount(accountId: number) {
+    this.store.dispatch(new clientActions.CloseAccount(accountId));
   }
 
 }
