@@ -59,14 +59,27 @@
                     <th>ტიპი</th>
                     <th>ვალუტა</th>
                     <th>სტატუსი</th>
+                    <th></th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-account>
-                  <tr>
+                  <tr class="ui-selectable-row">
                     <td>{{ account.id }}</td>
                     <td>{{ account.type }}</td>
                     <td>{{ account.currency }}</td>
-                    <td>{{ account.status }}</td>
+                    <td>
+                      <span [class]="'customer-badge status-qualified'">{{ account.status }}</span>
+                    </td>
+                    <td>
+                      <button pButton (click)="$event.stopPropagation();"
+                        [matMenuTriggerFor]="menu" type="button" class="ui-button-secondary"
+                        icon="pi pi-cog"></button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                          ანგარიშის დახურვა
+                        </button>
+                      </mat-menu>
+                    </td>
                   </tr>
                 </ng-template>
               </p-table>

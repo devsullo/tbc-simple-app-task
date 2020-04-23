@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-client-detail',
   templateUrl: './client-detail.component.html',
-  styleUrls: ['./client-detail.component.scss']
+  styleUrls: ['./client-detail.component.scss', '../clients.component.scss']
 })
 export class ClientDetailComponent implements OnInit {
 
