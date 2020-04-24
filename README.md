@@ -1,4 +1,6 @@
 # tbc-simple-app-task
 Clients task
 
-For run ```$sh start.sh```
+For run <br/>
+```$sh install.sh``` <br/> <br/>
+```$sh start.sh```
