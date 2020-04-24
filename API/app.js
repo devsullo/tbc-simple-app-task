@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const sharp = require('sharp');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -143,13 +144,25 @@ app.post('/upload', function (req, res) {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded');
   }
-
   const avatar = req.files.avatar;
-  avatar.mv('public/uploads/' + avatar.name , function (err) {
-    if (err)
-      return res.status(500).send(err);
+  const dir = 'public/uploads/';
+  const filePath = dir + avatar.name;
+  const newFileName = 'cropped_' + avatar.name;
+  
+  avatar.mv(filePath , function (mverr) {
+    if (mverr)
+      return res.status(500).send(mverr);
 
-    res.send({ fileName: avatar.name});
+    sharp(filePath)
+      .resize({
+        fit: "cover",
+        width: 120,
+        height: 120
+      })
+      .toFile(dir + newFileName, (err, info) => { 
+        if (err) return res.status(500).send(err);
+        res.send({ fileName: newFileName });
+       })
   });
 });
 

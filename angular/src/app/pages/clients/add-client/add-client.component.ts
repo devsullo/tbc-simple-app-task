@@ -58,9 +58,10 @@ export class AddClientComponent implements OnInit {
     });
   }
 
-  public onUpload(event) {
-    if (event.files) {
-      const fileName = event.files[0].name;
+  public onUpload(event: any) {
+    const resBody = event.originalEvent.body;
+    if (resBody) {
+      const fileName = resBody.fileName;
       this.avatar.setValue(fileName);
     }
     this.messageService.add({ severity: 'info', summary: 'ფაილი აიტვირთა', detail: '' });
