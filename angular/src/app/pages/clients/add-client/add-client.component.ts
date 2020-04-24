@@ -75,6 +75,8 @@ export class AddClientComponent implements OnInit {
     const formValue = this.clientForm.value;
     if (this.clientForm.valid) {
       this.store.dispatch(new clientActions.AddClient(formValue));
+      this.clientForm.reset();
+      this.hideDialog();
     }
   }
 
@@ -87,5 +89,8 @@ export class AddClientComponent implements OnInit {
     this.display = true;
   }
 
+  public hideDialog() {
+    this.display = false;
+  }
 
 }

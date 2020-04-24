@@ -40,6 +40,8 @@ export class EditClientComponent extends AddClientComponent implements OnInit {
     const formValue = this.clientForm.value;
     if (this.clientForm.valid) {
       this.store.dispatch(new clientActions.UpdateClient(formValue));
+      this.clientForm.reset();
+      this.hideDialog();
     }
   }
 

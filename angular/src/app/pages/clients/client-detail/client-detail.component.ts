@@ -48,7 +48,6 @@ export class ClientDetailComponent implements OnInit {
     this.store.select('clients').pipe(filter(c => c.loaded))
       .subscribe(clients => {
         this.client = clients.data.find(c => c.id === this.clientId);
-        console.log(this.clientId, clients, this.client);
       });
   }
 
@@ -66,7 +65,6 @@ export class ClientDetailComponent implements OnInit {
     }
     this.accountForm.get('clientId').setValue(this.clientId);
     const formValue = this.accountForm.value;
-    console.log(formValue);
     this.store.dispatch(new clientActions.AddAccount(formValue));
     this.accountForm.reset();
   }
