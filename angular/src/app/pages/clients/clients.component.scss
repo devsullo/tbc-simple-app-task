@@ -93,4 +93,16 @@
     }
   }
 
+  .avatar {
+    img {
+      width: 32px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+    span {
+      vertical-align: middle;
+      margin-left: .5em
+    }
+  }
+
 }

@@ -44,10 +44,10 @@
             {{ client[col.field] }}
           </span>
           <ng-template #fna>
-            <img class="avatar" [src]="client.avatarUrl" alt="Avatar" width="32" style="vertical-align: middle">
-            <span style="vertical-align: middle; margin-left: .5em">
-              {{client.fullName}}
-            </span>
+            <div class="avatar">
+              <img [src]="client.avatarUrl" alt="Avatar">
+              <span> {{client.fullName}} </span>
+            </div>
           </ng-template>
         </td>
         <td>
