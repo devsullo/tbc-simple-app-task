@@ -8,22 +8,26 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { MessageService } from 'primeng/api';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
+  constructor(private messageService: MessageService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .pipe(
         retry(1),
         catchError((error: HttpErrorResponse) => {
-          let errorMessage = '';
+          let errorMessage = {};
           if (error.error instanceof ErrorEvent) {
             // client-side error
-            errorMessage = `Error: ${error.error.message}`;
+            errorMessage = { severity: 'error', summary: `Error`, detail: error.error.message };
           } else {
             // server-side error
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            errorMessage = { severity: 'error', summary: `Error Code: ${error.status}`, detail: error.message };
           }
-          window.alert(errorMessage);
+          this.messageService.add(errorMessage);
           return throwError(errorMessage);
         })
       );

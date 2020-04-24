@@ -21,13 +21,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [
     TableModule,
@@ -49,7 +50,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     FormsModule,
     CardModule,
     DropdownModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ToastModule
   ],
   providers: [ConfirmationService, MessageService]
 })
