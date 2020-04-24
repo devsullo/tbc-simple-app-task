@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import * as clientActions from './clients.actions';
 import { environment } from 'src/environments/environment';
 import { Client } from '../client.model';
+import { MessageService } from 'primeng/api/';
 
 
 @Injectable()
@@ -29,6 +30,7 @@ export class ClientEffects {
     switchMap((action: clientActions.AddClient) => {
       return this.http.post(environment.apiUrl + '/client', action.payload).pipe(
         map((data: any) => {
+          this.toastMsg('კლიენტი დაემატა');
           const newClient = new Client().deserialize(data);
           return new clientActions.AddClientCompleted(newClient);
         })
@@ -43,6 +45,7 @@ export class ClientEffects {
       const clientId = action.payload;
       return this.http.delete(environment.apiUrl + '/client/' + action.payload).pipe(
         map(() => {
+          this.toastMsg();
           return new clientActions.RemoveClientComplated(clientId);
         })
       );
@@ -55,6 +58,7 @@ export class ClientEffects {
     switchMap((action: clientActions.UpdateClient) => {
       return this.http.put(environment.apiUrl + '/client/' + action.payload.id, action.payload).pipe(
         map((data: any) => {
+          this.toastMsg('კლიენტის მონაცემები შენახულია');
           const newClient = new Client().deserialize(data);
           return new clientActions.UpdateClientComplated(newClient);
         })
@@ -82,6 +86,7 @@ export class ClientEffects {
     switchMap((action: clientActions.AddAccount) => {
       return this.http.post(environment.apiUrl + '/account', action.payload).pipe(
         map((data: any) => {
+          this.toastMsg('ანგარიში დაემატა');
           return new clientActions.GetClientDetails(data.clientId);
         })
       );
@@ -94,14 +99,20 @@ export class ClientEffects {
     switchMap((action: clientActions.CloseAccount) => {
       return this.http.put(environment.apiUrl + '/account/close/' + action.payload, {}).pipe(
         map((data: any) => {
+          this.toastMsg('ანგარიში დაიხურა');
           return new clientActions.GetClientDetails(data.clientId);
         })
       );
     }
     ));
 
+  private toastMsg(msg = '') {
+    this.messageService.add({ severity: 'success', summary: 'ოფერაცია წარმატებით დასრულდა', detail: msg });
+  }
+
   constructor(
     private actions$: Actions,
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService: MessageService
   ) { }
 }
