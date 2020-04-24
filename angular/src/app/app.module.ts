@@ -10,6 +10,8 @@ import { AddClientComponent } from './pages/clients/add-client/add-client.compon
 import { AddClientAddressComponent } from './pages/clients/add-client/add-client-address/add-client-address.component';
 import { EditClientComponent } from './pages/clients/edit-client/edit-client.component';
 import { ClientDetailComponent } from './pages/clients/client-detail/client-detail.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,13 @@ import { ClientDetailComponent } from './pages/clients/client-detail/client-deta
     AppStoreModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
